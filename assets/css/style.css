@@ -1,0 +1,56 @@
+/*----------Importing Google Fonts----------*/
+@import url("https://fonts.googleapis.com/css?family=Architects+Daughter|Indie+Flower|Walter+Turncoat|Montserrat+Subrayada");
+
+
+body {
+	background-image: url("http://eskipaper.com/images/train-background-1.jpg");
+	background-attachment: fixed;
+	background-size: 100% 100%;
+
+}
+
+/*----------Heading----------*/
+.jumbotron {
+	margin-top: 10px;
+}
+h1 {
+	font-family: "Montserrat Subrayada";
+	font-size: 48px;
+	border-radius: 10px;
+}
+
+h2 {
+	font-family: "Walter Turncoat";
+}
+
+
+/*----------Train Schedule----------*/
+
+.container {
+	font-family: "Architects Daughter";
+	width: 80%;
+}
+
+
+h3 {
+	font-weight: bold;
+}
+
+
+#refresh {
+	font-size: 16px;
+	border: 1px solid lightgray;
+	background-color: white;
+	border-radius: 5px;
+	font-weight: normal;
+	padding: 10px;
+
+}
+
+#refresh:hover {
+	background-color: lightgray;
+}
+
+#refresh:active {
+	background-color: gray;
+}

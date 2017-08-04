@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Train Scheduler</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Firebase Reference -->
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+	<!-- Link to Moment.js should go here -->
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+	    <div class="jumbotron text-center">
+	    	<h1><i class="fa fa-train"></i> Train Scheduler <i class="fa fa-train"></i></h1>
+	    	<h2>...Chugga Chugga Choo Choo...</h2>
+	    </div>
+	</div>
+
+	<div class="container">
+		<div class = "row">
+
+			<div class="col-sm-8">
+				<div class="panel panel-default">
+					
+					<div class="panel-heading">
+						<h3>Current Train Schedule <button id="refresh" onclick="window.location.reload()">Refresh Page <i class="fa fa-refresh fa-spin"></i></button></h3>
+						<div><b>Current Time: </b><span id = "currentTime"></span></div>
+					</div>	
+					
+					<div class="panel-body table-responsive">
+						<table class="table">
+							
+							<thead>
+								<tr id ="title">
+									<th>Train name</th>
+									<th>Destination</th>
+									<th>Frequency (min)</th>
+									<th>Next arrival</th>
+									<th>Minutes away</th>
+								</tr>
+							</thead>
+							
+							<tbody id="data"></tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="panel-group" id = "add-train">
+					<div class="panel panel-default">
+
+						<div class="panel-heading">
+							<h3>Add Train</h3>
+						</div>
+
+						<div class="panel-body">
+							<form>
+								<div class="form-group">
+									<label for="train-name">Train Name</label>
+									<input type="text" class="form-control" id="train-name" placeholder="ie. Gold Line">
+								</div>
+
+								<div class="form-group">
+									<label for="destination">Destination</label>
+									<input type="text" class="form-control" id="destination" placeholder="Santa Monica">
+								</div>
+								
+								<div class="form-group">
+									<label for="train-time">First Train Time (HH:mm AM/PM)</label>
+									<input type="time" class="form-control" id="train-time">
+								</div>
+								
+								<div class="form-group">
+									<label for="frequency">Frequency (mins)</label>
+									<input type="text" class="form-control" id="frequency">
+								</div>
+								
+								<button class="btn btn-default" id="submit" type="submit">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</body>
+	<script type="text/javascript" src="assets/javascript/train.js"></script>
+	
+	</html>
