@@ -69,7 +69,7 @@
       // nextArrival: nextArrival,
     });
     
-    alert("Form submitted!"); //(modal)
+    alert("You have submitted a Train.."); //(modal)
 
     //-----empty textboxes-----//
     $("#train-name").val("");
