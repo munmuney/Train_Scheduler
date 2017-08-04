@@ -24,65 +24,69 @@
   //==========Submit Button==========//
   $("#submit").on("click", function() {
 
-  //-----Grab values and store into a variable-----//
-    trainName = $("#train-name").val().trim();
-    destination = $("#destination").val().trim();
-    firstTrainTime = $("#train-time").val().trim();
-    frequency = $("#frequency").val().trim();
-    
-    console.log("-----Button Pressed-----")
-    console.log("First Time: " + firstTrainTime);
+      //-----Grab values and store into a variable-----//
+      trainName = $("#train-name").val().trim();
+      destination = $("#destination").val().trim();
+      firstTrainTime = $("#train-time").val().trim();
+      frequency = $("#frequency").val().trim();
+      
+      //-----Check to make sure all input are added-----//
+      if(trainName !== "" && destination !== "" && firstTrainTime !== "" && frequency !== "") {
 
-   
-    //-----First Time (pushed back 1 year to make sure it comes before current time)-----//
-    var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
-    console.log("FTC: " + firstTimeConverted);
+        console.log("-----Button Pressed-----")
+        console.log("First Time: " + firstTrainTime);
+       
+        //-----First Time (pushed back 1 year to make sure it comes before current time)-----//
+        var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
+        console.log("FTC: " + firstTimeConverted);
 
-    //-----Difference between the times-----//
-    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    console.log("Difference in time: " + diffTime);
+        //-----Difference between the times-----//
+        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+        console.log("Difference in time: " + diffTime);
 
-    //-----Time apart (remainder)-----//
-    var tRemainder = diffTime % frequency;
-    console.log(tRemainder);
+        //-----Time apart (remainder)-----//
+        var tRemainder = diffTime % frequency;
+        console.log(tRemainder);
 
-    //-----Minute Until Train-----//
-    minutesAway = frequency - tRemainder;
-    console.log("Minutes away: " + minutesAway);
+        //-----Minute Until Train-----//
+        minutesAway = frequency - tRemainder;
+        console.log("Minutes away: " + minutesAway);
 
-    //-----Next Train Time-----//
-    var nextTrain = moment().add(minutesAway, "minutes");
-    console.log("Arrival time: " + moment(nextTrain).format("hh:mm"));
+        //-----Next Train Time-----//
+        var nextTrain = moment().add(minutesAway, "minutes");
+        console.log("Arrival time: " + moment(nextTrain).format("hh:mm"));
 
-    //-----Arrival Time-----//
-    nextArrival = moment(nextTrain).format("hh:mm A");
+        //-----Arrival Time-----//
+        nextArrival = moment(nextTrain).format("hh:mm A");
 
 
+        //=====Pushes the data into firebase=====//
+        database.ref().push({
+          trainName: trainName,
+          destination: destination,
+          firstTrainTime: firstTrainTime,
+          frequency: frequency
+          // minutesAway: minutesAway,
+          // nextArrival: nextArrival,
+        });
+        
+        alert("You have submitted a Train.."); //(modal)
 
-    //=====Pushes the data into firebase=====//
-    database.ref().push({
-      trainName: trainName,
-      destination: destination,
-      firstTrainTime: firstTrainTime,
-      frequency: frequency
-      // minutesAway: minutesAway,
-      // nextArrival: nextArrival,
-    });
-    
-    alert("You have submitted a Train.."); //(modal)
+        //-----empty textboxes-----//
+        $("#train-name").val("");
+        $("#destination").val("");
+        $("#train-time").val("");
+        $("#frequency").val("");
+        
+        //-----prevent from refreshing-----//
+        return false; 
 
-    //-----empty textboxes-----//
-    $("#train-name").val("");
-    $("#destination").val("");
-    $("#train-time").val("");
-    $("#frequency").val("");
-    
-    //-----prevent from refreshing-----//
-    return false; 
-
-    // Prevent default behavior
-    event.preventDefault();
-
+        // Prevent default behavior
+        event.preventDefault();
+      }
+      else {
+        alert("Please fill in all the blanks. Thank you and have a nice day!");
+      }
   });
 
  //var trainUpdate = function() {
